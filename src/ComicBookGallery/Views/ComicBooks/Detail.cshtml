@@ -6,6 +6,8 @@
     var description = "<p>Final issue! Witness the final hours of Doctor Octopus' life and his one, last great act of revenge! Even if Spider Man survives...<strong>will Peter Parker?</strong></p>";
     var artists = new string[]
     {
+        /* To comment out multiple lines, select the lines, hold down the ctrl + k following by c */
+        /* To uncomment, select the lines, hold down ctrl + k following by u */
         "Script: Dan Slott",
         "Pencils: Humberto Ramos",
         "Inks: Victor Olazaba",
@@ -34,8 +36,20 @@
         @* to write the value to view. *@
         <div>@Html.Raw(description)</div>
 
-        <h5>Artists:</h5>
-        <div>@artists</div>
+        @* Will only render if artists.Length is greater than 0 *@
+        @if (artists.Length > 0)
+        {
+            /* This part of the view will only render when the artist array has elements */
+            <h5>Artists:</h5>
+            <div>
+                <ul>
+                    @foreach (var artist in artists)
+                {
+                        <li>@artist</li>
+                    }
+                </ul>
+            </div>
+        }
     </div>
 </body>
 </html>
