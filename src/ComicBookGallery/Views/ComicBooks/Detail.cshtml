@@ -1,5 +1,17 @@
 ﻿@{
     Layout = null;
+
+    var seriesTitle = "The Amazing Spider-Man";
+    var issueNumber = 700;
+    var description = "<p>Final issue! Witness the final hours of Doctor Octopus' life and his one, last great act of revenge! Even if Spider Man survives...<strong>will Peter Parker?</strong></p>";
+    var artists = new string[]
+    {
+        "Script: Dan Slott",
+        "Pencils: Humberto Ramos",
+        "Inks: Victor Olazaba",
+        "Colors: Edgar Delgado",
+        "Letters: Chris Eliopoulos"
+    };
 }
 
 <!DOCTYPE html>
@@ -11,7 +23,19 @@
 </head>
 <body>
     <div>
-        <h1>Hello from our view!</h1>
+        <h1>@seriesTitle</h1>
+        <h2>Issue #@issueNumber</h2>
+
+        <h5>Description:</h5>
+        @* For security reasons MVC will escape by default *@
+        @* any HTML content that is written to the view. *@ 
+        @* Escaping HTML content prevents the browser from rendering it. *@
+        @* To prevent MVC from doing that, we can use the HTML.Raw method *@
+        @* to write the value to view. *@
+        <div>@Html.Raw(description)</div>
+
+        <h5>Artists:</h5>
+        <div>@artists</div>
     </div>
 </body>
 </html>
