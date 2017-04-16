@@ -1,42 +1,31 @@
 ﻿@{
-    Layout = null;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Comic Book Detail";
 }
 
-<!DOCTYPE html>
+<h1>@ViewBag.SeriesTitle</h1>
+<h2>Issue #@ViewBag.IssueNumber</h2>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title></title>
-</head>
-<body>
+<h5>Description:</h5>
+@* For security reasons MVC will escape by default *@
+@* any HTML content that is written to the view. *@ 
+@* Escaping HTML content prevents the browser from rendering it. *@
+@* To prevent MVC from doing that, we can use the HTML.Raw method *@
+@* to write the value to view. *@
+@* Unfortunately the ViewBag can't see if you miss spell. *@
+<div>@Html.Raw(ViewBag.Description)</div>
+
+@* Will only render if artists.Length is greater than 0 *@
+@if (ViewBag.Artists.Length > 0)
+{
+    /* This part of the view will only render when the artist array has elements */
+    <h5>Artists:</h5>
     <div>
-        <h1>@ViewBag.SeriesTitle</h1>
-        <h2>Issue #@ViewBag.IssueNumber</h2>
-
-        <h5>Description:</h5>
-        @* For security reasons MVC will escape by default *@
-        @* any HTML content that is written to the view. *@ 
-        @* Escaping HTML content prevents the browser from rendering it. *@
-        @* To prevent MVC from doing that, we can use the HTML.Raw method *@
-        @* to write the value to view. *@
-        @* Unfortunately the ViewBag can't see if you miss spell. *@
-        <div>@Html.Raw(ViewBag.Description)</div>
-
-        @* Will only render if artists.Length is greater than 0 *@
-        @if (ViewBag.Artists.Length > 0)
+        <ul>
+            @foreach (var artist in ViewBag.Artists)
         {
-            /* This part of the view will only render when the artist array has elements */
-            <h5>Artists:</h5>
-            <div>
-                <ul>
-                    @foreach (var artist in ViewBag.Artists)
-                {
-                        <li>@artist</li>
-                    }
-                </ul>
-            </div>
-        }
+                <li>@artist</li>
+            }
+        </ul>
     </div>
-</body>
-</html>
+}
