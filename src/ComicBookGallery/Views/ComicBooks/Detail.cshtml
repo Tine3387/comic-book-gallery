@@ -20,6 +20,7 @@
         @* Escaping HTML content prevents the browser from rendering it. *@
         @* To prevent MVC from doing that, we can use the HTML.Raw method *@
         @* to write the value to view. *@
+        @* Unfortunately the ViewBag can't see if you miss spell. *@
         <div>@Html.Raw(ViewBag.Description)</div>
 
         @* Will only render if artists.Length is greater than 0 *@
