@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ComicBookGallery.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -10,6 +11,20 @@ namespace ComicBookGallery.Controllers
     {
         public ActionResult Detail()
         {
+            var comicBook = new ComicBook()
+            {
+                SeriesTitle = "The Amazing Spider-Man",
+                IssueNumber = 700,
+                DescriptionHtml = "<p>Final issue! Witness the final hours of Doctor Octopus' life and his one, last great act of revenge! Even if Spider Man survives...<strong>will Peter Parker?</strong></p>",
+                Artists = new Artist[]
+                {
+                    new Artist() { Name = "Dan Slott", Role = "Script" },
+                    new Artist() { Name = "Humberto Ramos", Role = "Pencils" },
+                    new Artist() { Name = "Victor Olazaba", Role = "Inks" },
+                    new Artist() { Name = "Edgar Delgado", Role = "Colors" },
+                    new Artist() { Name = "Chris Eliopoulos", Role = "Letters" },
+                }
+            };
             /* ViewBag is an object provided by MVC, that allows us to pass data from our controller to a view. */
             /* Capatilize the letter after the ViewBag. since we switching from using variables to properties, */
             /* we need to capatilize the first letter of each property name. */
@@ -17,21 +32,14 @@ namespace ComicBookGallery.Controllers
             /* This allows us to define properties on the ViewBag object, */
             /* without having to modify a class as we normally have to do. */
             /* ViewBag is one of the few real world use cases for dynamic types in C#. */
-            ViewBag.SeriesTitle = "The Amazing Spider-Man";
+            /*ViewBag.SeriesTitle = "The Amazing Spider-Man";
             ViewBag.IssueNumber = 700;
-            ViewBag.Description = "<p>Final issue! Witness the final hours of Doctor Octopus' life and his one, last great act of revenge! Even if Spider Man survives...<strong>will Peter Parker?</strong></p>";
-            ViewBag.Artists = new string[]
-            {
-                /* To comment out multiple lines, select the lines, hold down the ctrl + k following by c */
-                /* To uncomment, select the lines, hold down ctrl + k following by u */
-                "Script: Dan Slott",
-                "Pencils: Humberto Ramos",
-                "Inks: Victor Olazaba",
-                "Colors: Edgar Delgado",
-                "Letters: Chris Eliopoulos"
-            };
-
-            return View();
+            ViewBag.Description = "<p>Final issue! Witness the final hours of Doctor Octopus' life and his one, last great act of revenge! Even if Spider Man survives...<strong>will Peter Parker?</strong></p>";*/
+            
+            /* To comment out multiple lines, select the lines, hold down the ctrl + k following by c */
+            /* To uncomment, select the lines, hold down ctrl + k following by u */
+ 
+            return View(comicBook);
         }
     }
 }
