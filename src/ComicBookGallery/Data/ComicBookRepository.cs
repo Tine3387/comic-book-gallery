@@ -58,6 +58,12 @@ namespace ComicBookGallery.Data
                 Favorite = false
             }
         };
+
+        public ComicBook[] GetComicBooks()
+        {
+            return _comicBooks;
+        }
+
         /* The public method returns a GetComicBook() instance */
         /* By passing int id to the method signature that will allow the caller of this method to pass in an id that comicbook that they're interested in */
         public ComicBook GetComicBook(int id)

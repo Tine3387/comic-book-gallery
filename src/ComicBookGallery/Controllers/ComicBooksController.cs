@@ -17,6 +17,13 @@ namespace ComicBookGallery.Controllers
             _comicBookRepository = new ComicBookRepository();
         }
 
+        public ActionResult Index()
+        {
+            var comicBooks = _comicBookRepository.GetComicBooks();
+
+            return View(comicBooks);
+        }
+
         /* Updating our parameter to be nullable by adding a question mark after int. */
         /* Therefore MVC can successfully pass null for the id parameter if an id value isn't provided as part of the request */
         public ActionResult Detail(int? id)
