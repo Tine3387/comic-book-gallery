@@ -1,4 +1,5 @@
-﻿using ComicBookGallery.Models;
+﻿using ComicBookGallery.Data;
+using ComicBookGallery.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,22 +10,23 @@ namespace ComicBookGallery.Controllers
 {
     public class ComicBooksController : Controller
     {
-        public ActionResult Detail()
+        private ComicBookRepository _comicBookRepository = null;
+
+        public ComicBooksController()
         {
-            var comicBook = new ComicBook()
+            _comicBookRepository = new ComicBookRepository();
+        }
+
+        /* Updating our parameter to be nullable by adding a question mark after int. */
+        /* Therefore MVC can successfully pass null for the id parameter if an id value isn't provided as part of the request */
+        public ActionResult Detail(int? id)
+        {
+            if (id == null)
             {
-                SeriesTitle = "The Amazing Spider-Man",
-                IssueNumber = 700,
-                DescriptionHtml = "<p>Final issue! Witness the final hours of Doctor Octopus' life and his one, last great act of revenge! Even if Spider Man survives...<strong>will Peter Parker?</strong></p>",
-                Artists = new Artist[]
-                {
-                    new Artist() { Name = "Dan Slott", Role = "Script" },
-                    new Artist() { Name = "Humberto Ramos", Role = "Pencils" },
-                    new Artist() { Name = "Victor Olazaba", Role = "Inks" },
-                    new Artist() { Name = "Edgar Delgado", Role = "Colors" },
-                    new Artist() { Name = "Chris Eliopoulos", Role = "Letters" },
-                }
-            };
+                return HttpNotFound();
+            }
+            /* Can place both ((int)id) and id.Value */
+            var comicBook = _comicBookRepository.GetComicBook((int)id);
             /* ViewBag is an object provided by MVC, that allows us to pass data from our controller to a view. */
             /* Capatilize the letter after the ViewBag. since we switching from using variables to properties, */
             /* we need to capatilize the first letter of each property name. */
